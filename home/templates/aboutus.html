@@ -1,0 +1,36 @@
+{% extends "homebase.html" %}
+
+{% block title %}AboutUs-{{setting.title}}{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block head%}<link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url}}' />{% endblock %}
+
+{% block content %}
+     <!-- breadcrumb-start -->
+    <section class="breadcrumb breadcrumb_bg banner-bg-1 overlay2 ptb200">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Our Company</h2>
+                            <p> <a href="/">Home ></a> <span></span>AboutUs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-end -->
+    <!-- about start -->
+    <div class="about-area section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                {{ setting.aboutus|safe}}
+            </div>
+        </div>
+    </div>
+    <!-- about end -->
+
+{% endblock %}
