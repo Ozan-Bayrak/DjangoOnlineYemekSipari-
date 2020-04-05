@@ -1,53 +1,50 @@
-<!-- slider-area-start -->
-<div class="slider-area">
+<style>
+    .hover-overlay-container {
+        position: relative;
+        width: 1400px;
+    }
+    .hover-overlay-container:hover .overlay-image {
+        opacity: 0.3;
+    }
+    .hover-overlay-container:hover .overlay-btn-container {
+        opacity: 1;
+    }
+    .hover-overlay-container .overlay-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        opacity: 1;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+    .hover-overlay-container .overlay-btn-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+        transition: .5s ease;
+        text-align: center;
+        transform: translate(-50%, -50%);
+    }
+    .hover-overlay-container .overlay-btn-container .overlay-btn {
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 16px;
+        background-color: coral;
+        text-decoration: none;
+    }
+</style><!-- slider-area-start -->
+<div class="slider-area" style="height: 450px">
     <div class="slider-active owl-carousel">
-        <div class="single-slider bg-img-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-7 offset-xl-1 col-lg-7">
-                        <div class="slider-content">
-                            <p>Quality work. Trustable service. Dedicated team</p>
-                            <h3>We provide your Industrial solution</h3>
-                            <div class="slider-btn">
-                                <a class="boxed-btn2" href="#">Our Services <i
-                                        class="Flaticon flaticon-right-arrow"></i></a>
-                            </div>
-                        </div>
+        {% for rs in sliderdata %}
+            <div class="single-slider " style="height: 450px">
+                <div class="hover-overlay-container">
+                    <img class="overlay-image" src="{{ rs.image.url }}" alt="">
+                    <div class="overlay-btn-container btn-lg">
+                        <a href="/{{ rs.restaurant }}" class="overlay-btn">{{ rs.title }}</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="single-slider bg-img-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-7 offset-xl-1 col-lg-7">
-                        <div class="slider-content">
-                            <p>Quality work. Trustable service. Dedicated team</p>
-                            <h3>We provide your Industrial solution</h3>
-                            <div class="slider-btn">
-                                <a class="boxed-btn2" href="#">Our Services <i
-                                        class="Flaticon flaticon-right-arrow"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="single-slider bg-img-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-7 offset-xl-1 col-lg-7">
-                        <div class="slider-content">
-                            <p>Quality work. Trustable service. Dedicated team</p>
-                            <h3>We provide your Industrial solution</h3>
-                            <div class="slider-btn">
-                                <a class="boxed-btn2" href="#">Our Services <i
-                                        class="Flaticon flaticon-right-arrow"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
