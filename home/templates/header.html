@@ -43,20 +43,7 @@
                                     <li><a href="/aboutus">AboutUs</a></li>
                                     <li><a href="service.html">Services</a></li>
                                     <li><a href="project.html">Projects</a></li>
-                                    <li><a href="">Categories<i class="ti-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            {% load mptt_tags %}
-                                            {% recursetree category %}
-                                                <li>
-                                                    <a href="/category/{{ node.slug }}">{{ node.title }}</a>
-                                                    {% if not node.is_leaf_node %}
-                                                        <ul class="children">
-                                                          {{ children }}
-                                                        </ul>
-                                                    {% endif %}
-                                                </li>
-                                            {% endrecursetree %}
-                                        </ul>
+                                    <li><a href="/restaurants">Restaurants<i></i></a>
                                     </li>
                                     <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                         <ul class="submenu">

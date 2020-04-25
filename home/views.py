@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.models import Setting, ContactForm, ContactFormMessage
-from restaurant.models import Foods, Category
+from restaurant.models import Foods, Category, Restaurant
 
 
 def index(request):
@@ -17,6 +17,12 @@ def index(request):
              'page' : 'home',
              'sliderdata' : sliderdata}
     return render(request, 'index.html',context)
+
+def restaurants(request):
+    restaurant = Restaurant.objects.all()
+    context = {'restaurant': restaurant}
+    return render(request, 'restaurants.html', context)
+
 
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
