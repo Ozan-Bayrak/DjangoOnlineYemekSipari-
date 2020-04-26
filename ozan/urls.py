@@ -28,6 +28,7 @@ urlpatterns = [
     path('restaurant/', include('restaurant.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('restaurant/<int:id>/<str:title>', views.restaurants_detail, name='restaurants_detail'),
 ]
 if settings.DEBUG: #new
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

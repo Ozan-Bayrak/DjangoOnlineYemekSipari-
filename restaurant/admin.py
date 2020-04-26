@@ -5,7 +5,8 @@ from django.contrib import admin
 from django.utils.html import format_html
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from restaurant.models import Category, Restaurant, Foods, Images
+from restaurant.models import Category, Restaurant, Foods, Images, Comment
+
 
 class RestaurantImageInLine(admin.TabularInline):
     model = Images
@@ -65,7 +66,12 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display=['subject','comment','restaurant','user','status']
+    list_filter = ['status']
+
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Restaurant,RestaurantAdmin)
 admin.site.register(Foods,FoodsAdmin)
 admin.site.register(Images,ImagesAdmin)
+admin.site.register(Comment,CommentAdmin)

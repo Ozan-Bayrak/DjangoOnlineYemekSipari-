@@ -29,12 +29,12 @@
                 {% for rs in restaurant %}
                 <div class="col-xl-4 col-md-4">
                     <div class="single-service">
-                        <div class="service-thumb">
-                            <img src="{{ rs.image.url }}" alt="">
+                        <div class="service-thumb" >
+                            <img style="height:250px" src="{{ rs.image.url }}" alt="">
                         </div>
                         <h3>{{ rs.title }}</h3>
                         <p>{{rs.description}}</p>
-                        <a href="#" class="genric-btn primary circle btn-sm">Products</a>
+                        <a href="/restaurant/{{ rs.id }}/{{ rs.title }}" class="genric-btn primary circle btn-sm"> <span>Products</span></a>
                     </div>
                 </div>
                 {% endfor %}
