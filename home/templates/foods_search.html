@@ -1,0 +1,51 @@
+{% extends "homebase.html" %}
+
+{% block title %}Foods Search Results{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block head%}<link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url}}' />{% endblock %}
+
+{% block content %}
+     <!-- breadcrumb-start -->
+    <section class="breadcrumb breadcrumb_bg banner-bg-1 overlay2 ptb200">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Our Foods</h2>
+                            <p> <a href="/">Home ></a> <span></span>Search</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-end -->
+   <div class="service-area">
+        <div class="container">
+            <div class="row">
+               <table cellpadding="3" width="1200"  class="table">
+                   <thead class="thead-dark">
+                   <tr>
+                       <th>Image</th>
+                       <th>Food Name</th>
+                       <th>Price</th>
+                       <th></th>
+                   </tr>
+                   </thead>
+
+                   {% for rs in foods %}
+                   <tr>
+                       <td> <img src="{{ rs.image.url }}" style="height: 150px;"></td>
+                       <td><h4>{{ rs.title }}</h4></td>
+                       <td><h4>${{ rs.price }}</h4></td>
+                       <td><a href="/restaurant/{{ rs.restaurant_id}}" class="btn-lg btn-success">Satın Al</a></td>
+                   </tr>
+                   {% endfor %}
+               </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

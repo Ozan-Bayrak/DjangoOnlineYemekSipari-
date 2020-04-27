@@ -1,8 +1,12 @@
+import json
+
 from django.contrib import messages
+from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage
 from restaurant.models import Foods, Category, Restaurant, Images, Comment
 
@@ -52,11 +56,57 @@ def contact(request):
     context = {'setting': setting, 'form': form}
     return render(request, 'contact.html', context)
 
-
-def restaurants_detail(request, id, title):
+def restaurants_detail(request, id):
     restaurant = Restaurant.objects.get(pk=id)
     images = Images.objects.filter(restaurant_id=id)
     foods = Foods.objects.filter(restaurant_id=id)
     comments = Comment.objects.filter(restaurant_id=id,status='True')
     context = {'restaurant': restaurant, 'images': images, 'foods': foods,'comments':comments }
     return render(request, 'restaurants_detail.html', context)
+
+def food_search(request):
+    if request.method == 'POST': #form post edildiyse
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query'] #formdan bilgiyi al
+            foods = Foods.objects.filter(title__icontains=query) #Select * from food where title like %query%
+            restaurant = Restaurant.objects.all()[:1]
+            #return HtttpResponse(foods)
+            context = {'foods':foods,
+                       'category':category,
+                       'restaurant':restaurant}
+            return render(request,'foods_search.html',context)
+    return HttpResponseRedirect('/')
+
+def food_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        food = Foods.objects.filter(city__icontains=q)
+        results = []
+        for rs in food:
+            food_json = {}
+            food_json = rs.title
+            results.append(food_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.error(request, "Login Hatası ! Kullanıcı adı yada şifre hatalı.")
+            return HttpResponseRedirect('/login')
+    return render(request,'login.html')

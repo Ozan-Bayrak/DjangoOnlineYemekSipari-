@@ -1,30 +1,27 @@
 {% load static %}
+<!-- jQuery !-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+<!-- jQuery UI !-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <!-- header-start -->
+<script>
+        $(function() {
+            $("#query").autocomplete({
+                source: "/search_auto/",
+                select: function (event, ui) { //item selected
+                    AutoCompleteSelectHandler(event, ui)
+                },
+                minLength: 2,
+            });
+        });
+        function AutoCompleteSelectHandler(event, ui)
+        {
+            var selectedObj = ui.item;
+        }
+    </script>
 <header>
     <div class="header-area ">
-        <div class="header-top black-bg d-none d-md-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-md-6 col-lg-6">
-                        <div class="header-contact">
-                            <a href="#"><i class="fa fa-phone"></i> +880 256 356 256</a>
-                            <a href="#"><i class="fa fa-envelope"></i> support24@durg.com</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 col-lg-6">
-                        <div class="header-top-menu">
-                            <nav>
-                                <ul>
-                                    <li><a href="blog.html">News & media</a></li>
-                                    <li><a href="review.html">Review</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="sticky-header" class="main-header-area white-bg">
             <div class="container">
                 <div class="row align-items-center">
@@ -62,9 +59,17 @@
                             <div class="search-bar">
                                 <a id="search_1" href="javascript:void(0)"><i class="fa fa-search"></i></a>
                             </div>
-                            <div class="get-quote d-none d-lg-block">
-                                <a class="boxed-btn" href="#">Get a quote</a>
-                            </div>
+                            {% if user.id is not None %}
+                                <div class="get-quote d-none d-lg-block">
+                                    <a class="btn btn-success" href="#">{{user.first_name}}</a>
+                                    <a class="btn btn-danger" href="/logout/">Logout</a>
+                                </div>
+                            {% else %}
+                                <div class="get-quote d-none d-lg-block">
+                                    <a class="btn btn-success"  href="/login/">Login</a>
+                                    <a class="btn btn-primary"  href="/join/">JoinUs</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-12">
@@ -73,8 +78,9 @@
                 </div>
                 <div class="search_input" id="search_input_box">
                     <div class="container ">
-                        <form class="d-flex justify-content-between search-inner">
-                            <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                        <form class="d-flex justify-content-between search-inner" method="post" action="/search/">
+                            {% csrf_token %}
+                            <input name="query" type="text" class="form-control" id="query" placeholder="Food Search">
                             <button type="submit" class="btn"></button>
                             <span class="fa fa-close" id="close_search" title="Close Search"></span>
                         </form>
