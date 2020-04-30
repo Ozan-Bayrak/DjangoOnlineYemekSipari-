@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from home.forms import SearchForm
+from home.forms import SearchForm, JoinForm
 from home.models import Setting, ContactForm, ContactFormMessage
 from restaurant.models import Foods, Category, Restaurant, Images, Comment
 
@@ -110,3 +110,17 @@ def login_view(request):
             messages.error(request, "Login Hatası ! Kullanıcı adı yada şifre hatalı.")
             return HttpResponseRedirect('/login')
     return render(request,'login.html')
+
+def join_view(request):
+    if request.method == 'POST':
+        form = JoinForm(request.POST)
+        if form.is_valid():
+            form.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username,password=password)
+        login(request,user)
+        return HttpResponseRedirect('/')
+    form = JoinForm()
+    context = {'form':form,}
+    return render(request, 'join.html',context)

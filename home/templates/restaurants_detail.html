@@ -215,6 +215,13 @@
                         <hr>
                     {% endfor %}
                     <h1>Write Your Comment</h1>
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% endif %}
                     <form action="/restaurant/addcomment/{{ restaurant.id }}" method="post">
                         {% csrf_token %}
                         <div class="row">

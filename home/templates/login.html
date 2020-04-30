@@ -13,6 +13,13 @@
     <section class="contact-section">
         <div class="container" style="width: 30%">
             <div class="row">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <form  class="form-contact contact_form" method="post">
                     <div class="form-group">
                         {% csrf_token %}
