@@ -26,6 +26,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('restaurants/', views.restaurants, name='restaurants'),
     path('restaurant/', include('restaurant.urls')),
+    path('user/', include('user.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('restaurant/<int:id>/', views.restaurants_detail, name='restaurants_detail'),
