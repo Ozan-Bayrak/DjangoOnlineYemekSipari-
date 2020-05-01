@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from home import views
+from order import views as orderviews
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('restaurants/', views.restaurants, name='restaurants'),
     path('restaurant/', include('restaurant.urls')),
     path('user/', include('user.urls')),
+    path('order/', include('order.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('restaurant/<int:id>/', views.restaurants_detail, name='restaurants_detail'),
@@ -35,6 +37,8 @@ urlpatterns = [
     path('logout/',views.logout_view,name='logout_view'),
     path('login/', views.login_view, name='login_view'),
     path('join/', views.join_view, name='join_view'),
+    path('shopcart/', orderviews.shopcart, name='shopcart'),
+
 ]
 
 if settings.DEBUG: #new
