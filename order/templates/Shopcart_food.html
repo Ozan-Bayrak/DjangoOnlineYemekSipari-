@@ -47,7 +47,7 @@
                             <td><h4>${{ rs.food.price }}</h4></td>
                             <td><h4>{{ rs.quantity }}</h4></td>
                             <td><h4>${{ rs.amount }}</h4></td>
-                            <td><a href="/order/deletefromcart{{ rs.id}}" class="btn-sm btn-danger" onclick="return confirm('Are you sure?')">X</a></td>
+                            <td><a href="/order/deletefromcart/{{ rs.id}}" class="btn-sm btn-danger" onclick="return confirm('Are you sure?')">X</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
