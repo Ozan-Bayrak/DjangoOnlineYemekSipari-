@@ -6,20 +6,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <!-- header-start -->
 <script>
-        $(function() {
-            $("#query").autocomplete({
-                source: "/search_auto/",
-                select: function (event, ui) { //item selected
-                    AutoCompleteSelectHandler(event, ui)
-                },
-                minLength: 2,
-            });
+    $(function() {
+        $("#query").autocomplete({
+            source: "/search_auto/",
+            select: function (event, ui) { //item selected
+                AutoCompleteSelectHandler(event, ui)
+            },
+            minLength: 2,
         });
-        function AutoCompleteSelectHandler(event, ui)
-        {
-            var selectedObj = ui.item;
-        }
-    </script>
+    });
+    function AutoCompleteSelectHandler(event, ui)
+    {
+        var selectedObj = ui.item;
+    }
+</script>
 <header>
     <div class="header-area ">
         <div id="sticky-header" class="main-header-area white-bg">
@@ -37,19 +37,26 @@
                             <nav>
                                 <ul id="navigation">
                                     <li><a class="active" href="/">Home</a></li>
-                                    <li><a href="/aboutus">AboutUs</a></li>
-                                    <li><a href="project.html">Projects</a></li>
-                                    <li><a href="/restaurants">Restaurants<i></i></a>
                                     </li>
-                                    <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                    <li><a href="#">Categories<i class="ti-angle-down"></i></a>
+                                        {% load mptt_tags %}
                                         <ul class="submenu">
-                                            <li><a href="elements.html">elements</a></li>
-                                            <li><a href="service-details.html">service-details</a></li>
-                                            <li><a href="project-details.html">project-details</a></li>
+                                            {% recursetree category %}
+                                                <li><a href="/category/{{ node.id }}/{{ node.slug }}">
+                                                    {{ node.title }}
+                                                    {% if not node.is_leaf_node %}
+                                                        <ul class="children">
+                                                            <li>{{ children }}</li>
+                                                        </ul>
+                                                    {% endif %}
+                                                </a>
+                                                </li>
+                                            {% endrecursetree %}
                                         </ul>
                                     </li>
+                                    <li><a href="/aboutus">AboutUs</a></li>
                                     <li><a href="/contact">Contact</a></li>
-                                    <li><a href="/shopcart/">ShopCart</a></li>
+                                    <li><a href="/shopcart/">ShopCart<i class="fa fa-sm fa-shopping-basket"></i></a></li>
                                 </ul>
                             </nav>
                         </div>

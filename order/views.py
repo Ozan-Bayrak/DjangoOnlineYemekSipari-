@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from order.models import ShopCartForm, ShopCart
+from restaurant.models import Category
 
 
 def index(request):
@@ -46,12 +47,13 @@ def addtocart(request,id):
 def shopcart(request):
     current_user = request.user
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
+    category = Category.objects.all()
     total = 0
     for rs in shopcart:
         total += rs.food.price * rs.quantity
 
     context = {'shopcart': shopcart,
-               'total':total,}
+               'total':total,'category':category}
 
     return render(request,'Shopcart_food.html',context)
 

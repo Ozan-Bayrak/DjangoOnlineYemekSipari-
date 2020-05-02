@@ -27,13 +27,22 @@ def index(request):
 
 def restaurants(request):
     restaurant = Restaurant.objects.all()
-    context = {'restaurant': restaurant}
+    category = Category.objects.all()
+    context = {'restaurant': restaurant,'category':category}
     return render(request, 'restaurants.html', context)
+
+def category_restaurants(request,id,slug):
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    restaurant = Restaurant.objects.filter(category_id=id)
+    context ={'category':category,'restaurant':restaurant,'categorydata':categorydata}
+    return render(request,'restaurants.html',context)
 
 
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'aboutus'}
+    category = Category.objects.all()
+    context = {'setting': setting, 'page': 'aboutus','category':category}
     return render(request, 'aboutus.html', context)
 
 
@@ -52,8 +61,9 @@ def contact(request):
             return HttpResponseRedirect('/contact')
 
     setting = Setting.objects.get(pk=1)
+    category = Category.objects.all()
     form = ContactForm()
-    context = {'setting': setting, 'form': form}
+    context = {'setting': setting, 'form': form,'category':category}
     return render(request, 'contact.html', context)
 
 def restaurants_detail(request, id):
@@ -61,7 +71,8 @@ def restaurants_detail(request, id):
     images = Images.objects.filter(restaurant_id=id)
     foods = Foods.objects.filter(restaurant_id=id)
     comments = Comment.objects.filter(restaurant_id=id,status='True')
-    context = {'restaurant': restaurant, 'images': images, 'foods': foods,'comments':comments }
+    category = Category.objects.all()
+    context = {'restaurant': restaurant, 'images': images, 'foods': foods,'comments':comments,'category':category}
     return render(request, 'restaurants_detail.html', context)
 
 def food_search(request):
@@ -109,7 +120,9 @@ def login_view(request):
         else:
             messages.error(request, "Login Hatası ! Kullanıcı adı yada şifre hatalı.")
             return HttpResponseRedirect('/login')
-    return render(request,'login.html')
+    category = Category.objects.all()
+    context = {'category': category}
+    return render(request,'login.html', context )
 
 def join_view(request):
     if request.method == 'POST':
@@ -121,6 +134,7 @@ def join_view(request):
         user = authenticate(username=username,password=password)
         login(request,user)
         return HttpResponseRedirect('/')
+    category = Category.objects.all()
     form = JoinForm()
-    context = {'form':form,}
+    context = {'form':form,'category': category}
     return render(request, 'join.html',context)

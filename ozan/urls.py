@@ -25,7 +25,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path('aboutus/', views.aboutus, name='aboutus'),
     path('contact/', views.contact, name='contact'),
-    path('restaurants/', views.restaurants, name='restaurants'),
     path('restaurant/', include('restaurant.urls')),
     path('user/', include('user.urls')),
     path('order/', include('order.urls')),
@@ -38,6 +37,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login_view'),
     path('join/', views.join_view, name='join_view'),
     path('shopcart/', orderviews.shopcart, name='shopcart'),
+    path('category/<int:id>/<slug:slug>/', views.category_restaurants, name='category_restaurants'),
 
 ]
 
