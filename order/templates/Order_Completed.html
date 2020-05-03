@@ -1,0 +1,23 @@
+{% extends "homebase.html" %}
+
+{% block title %}Completed-{{setting.title}}{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block head%}<link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url}}' />{% endblock %}
+
+{% block content %}
+    <!-- breadcrumb-start -->
+
+    <!-- ================ contact section start ================= -->
+    <section class="contact-section">
+        <div class="container">
+            <i class="fa fa-check-circle fa-5x">Siparişiniz bize ulaşmıştır.<br> Sipariş Kodunuz: {{ ordercode }} </i>
+
+
+        </div>
+
+    </section>
+    <!-- ================ contact section end ================= -->
+
+{% endblock %}

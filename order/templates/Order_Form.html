@@ -1,0 +1,94 @@
+{% extends "homebase.html" %}
+
+{% block title %}Orders{{setting.title}}{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block head%}<link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url}}' />{% endblock %}
+
+{% block content %}
+    <!-- breadcrumb-start -->
+    <section class="breadcrumb breadcrumb_bg banner-bg-1 overlay2 ptb200">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>OrderForm</h2>
+                            <p> <a href="/">Home ></a> <span></span>OrderForm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-end -->
+    <!-- ================ contact section start ================= -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="d-none d-sm-block mb-5 pb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="contact-title">Contact Form</h2>
+                    </div>
+                    <div class="col-lg-6">
+                        <form  class="form-contact contact_form" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <p><label for="id_first_name">Name:</label>
+                                    <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control valid" placeholder="Name"></p>
+                                <p><label for="id_last_name">Surname</label>
+                                    <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control valid" placeholder="Surname"></p>
+                                <p><label for="id_address">Address</label>
+                                    <input type="text" name="address" value="{{ profile.address }}" class="form-control valid" placeholder="Address"></p>
+                                <p><label for="id_phone">Phone</label>
+                                    <input type="text" name="phone" value="{{ profile.phone }}" class="form-control valid" placeholder="phone"></p>
+                                <button type="submit" class="button button-contactForm boxed-btn">Completed Order</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <p><label for="id_first_name">Total:</label>
+                            <input type="text"  class="form-control valid" readonly value="${{ total }}" ></p>
+                        <p><label for="id_first_name">Credit Card Holder:</label>
+                            <input type="text"   class="form-control valid" ></p>
+                        <p><label for="id_last_name">Credit Card Number</label>
+                            <input type="text"   class="form-control valid" ></p>
+                        <p><label for="id_address">Credit Exp Date/year</label>
+                            <input type="text"   class="form-control valid" placeholder="MM/YY"></p>
+                        <p><label for="id_phone">Security Number</label>
+                            <input type="text"   class="form-control valid" ></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <table cellpadding="3" width="1200"  class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Restaurant</th>
+                            <th>Food Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for rs in scart %}
+                            <tr>
+                                <td> <img src="{{ rs.food.image.url }}" style="height: 50px;"></td>
+                                <td><h4>{{ rs.food.restaurant }}</h4></td>
+                                <td><h4>{{ rs.food }}</h4></td>
+                                <td><h4>${{ rs.food.price }}</h4></td>
+                                <td><h4>{{ rs.quantity }}</h4></td>
+                                <td><h4>${{ rs.amount }}</h4></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </section>
+    <!-- ================ contact section end ================= -->
+
+{% endblock %}
