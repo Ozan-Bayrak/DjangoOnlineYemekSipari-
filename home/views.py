@@ -8,6 +8,7 @@ from django.shortcuts import render
 # Create your views here.
 from home.forms import SearchForm, JoinForm
 from home.models import Setting, ContactForm, ContactFormMessage
+from order.models import ShopCart
 from restaurant.models import Foods, Category, Restaurant, Images, Comment
 
 
@@ -16,6 +17,8 @@ def index(request):
     sliderdata = Foods.objects.all()[:5]
     category = Category.objects.all()
     lastrestaurants = Restaurant.objects.all().order_by('-id')[:6]
+    current_user = request.user
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()  # count item in shopcart
 
     context = {'setting': setting,
                'category': category,

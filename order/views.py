@@ -35,7 +35,7 @@ def addtocart(request,id):
                 data.food_id = id
                 data.quantity = form.cleaned_data['quantity']
                 data.save() # DB kaydet
-
+            request.session['cart_items']=ShopCart.objects.filter(user_id=current_user.id).count() #count item in shopcart
             messages.success(request,'Ürün Sepete Eklendi.')
 
             return HttpResponseRedirect(url)
@@ -48,6 +48,7 @@ def shopcart(request):
     current_user = request.user
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     category = Category.objects.all()
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()  # count item in shopcart
     total = 0
     for rs in shopcart:
         total += rs.food.price * rs.quantity
@@ -60,5 +61,7 @@ def shopcart(request):
 @login_required(login_url='/login') #check login
 def deletefromcart(request,id):
     ShopCart.objects.filter(id=id).delete()
+    current_user = request.user
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()  # count item in shopcart
     messages.success(request,"Ürün Sepetten Silinmiştir.")
     return HttpResponseRedirect("/shopcart")

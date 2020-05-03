@@ -56,7 +56,8 @@
                                     </li>
                                     <li><a href="/aboutus">AboutUs</a></li>
                                     <li><a href="/contact">Contact</a></li>
-                                    <li><a href="/shopcart/">ShopCart<i class="fa fa-sm fa-shopping-basket"></i></a></li>
+                                    <li><a href="/shopcart/">ShopCart<i class="fa fa-sm fa-shopping-basket"></i>
+                                    <span style="color: red">{{ request.session.cart_items }}</span></a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -68,7 +69,7 @@
                             </div>
                             {% if user.id is not None %}
                                 <div class="get-quote d-none d-lg-block">
-                                    <a class="btn btn-success" href="#">{{user.first_name}}</a>
+                                    <a class="btn btn-success" href="/user_profile">{{user.first_name}}</a>
                                     <a class="btn btn-danger" href="/logout/">Logout</a>
                                 </div>
                             {% else %}

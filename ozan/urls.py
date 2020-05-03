@@ -20,6 +20,7 @@ from django.urls import path, include
 
 from home import views
 from order import views as orderviews
+from user import views as userviews
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -38,6 +39,7 @@ urlpatterns = [
     path('join/', views.join_view, name='join_view'),
     path('shopcart/', orderviews.shopcart, name='shopcart'),
     path('category/<int:id>/<slug:slug>/', views.category_restaurants, name='category_restaurants'),
+    path('user_profile/',userviews.index, name='index')
 
 ]
 
