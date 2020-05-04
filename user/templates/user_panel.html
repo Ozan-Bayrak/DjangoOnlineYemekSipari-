@@ -40,7 +40,7 @@
         background-color: #ced4da;
     }
     .list-group-tree .list-group-item:hover {
-        color: #b46409;
+        color: #000000;
         background-color: #fff;
         outline: 0;
         font-weight: 700;
@@ -50,11 +50,12 @@
 <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
     <div class="product-categori">
         <div class="filter-sidebar-left table">
-            <img  class="img-thumbnail" src="{{ profile.image.url }}" alt="User Image" style="height: 100px" />
             <div class="list-group list-group-collapse list-group-sm list-group-tree " id="list-group-men" data-children=".sub-men">
                 <a href="/user" class="list-group-item list-group-item-action ">My Profile</a>
                 <a href="/shop" class="list-group-item list-group-item-action">My Orders</a>
                 <a href="/user/comment" class="list-group-item list-group-item-action">My Comments</a>
+                <a href="/user/update" class="list-group-item list-group-item-action">Updated Profile</a>
+                <a href="/user/password" class="list-group-item list-group-item-action">Change Password</a>
                 <a href="/logout" class="list-group-item list-group-item-action">Logout</a>
             </div>
         </div>

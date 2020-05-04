@@ -14,8 +14,8 @@
                 <div class="col-lg-7 offset-lg-1">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>User Profile</h2>
-                            <p> <a href="/">Home ></a> <span></span>User Profile</p>
+                            <h2>User Profile Update</h2>
+                            <p> <a href="/">Home ></a> <span></span>User Profile Update</p>
                         </div>
                     </div>
                 </div>
@@ -38,25 +38,16 @@
                         <div class="col-12">
                             <h2 class="contact-title">User Information</h2>
                         </div>
-                         <img  class="img-thumbnail" src="{{ profile.image.url }}" alt="User Image" style="height: 100px" />
-                        <table class="table">
-                            <tr>
-                                <th scope="col">Name Surname</th>
-                                <td>{{ profile.user.first_name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Email</th>
-                                <td>{{ profile.user.email }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Adress</th>
-                                <td>{{ profile.address}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Phone</th>
-                                <td>{{ profile.phone }}</td>
-                            </tr>
-                        </table>
+                       <form method="post" enctype="multipart/form-data">
+                           {% csrf_token %}
+                           <fieldset class="form-group">
+                               {{ user_form.as_p }}
+                               {{ profile_form.as_p }}
+                           </fieldset>
+                           <div class="form-group">
+                               <button class="btn btn-block btn-info" type="submit">Update</button>
+                           </div>
+                       </form>
                     </div>
                 </div>
             </div>
