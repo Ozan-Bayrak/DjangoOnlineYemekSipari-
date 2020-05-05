@@ -18,7 +18,7 @@ def addcomment(request, id):
         if form.is_valid():
             current_user=request.user #Acces User Session information
             data=Comment() #model ile bağlantı kur
-            data.user.id = current_user.id
+            data.user_id = current_user.id
             data.restaurant_id = id
             data.subject = form.cleaned_data['subject']
             data.comment = form.cleaned_data['comment']
