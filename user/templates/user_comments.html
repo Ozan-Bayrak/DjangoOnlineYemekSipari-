@@ -8,9 +8,9 @@
 
 {% block content %}
     <style>
-    .banner-bg-1{
-        background-image: url("../../uploads/images/banner.jpg");
-    }
+        .banner-bg-1{
+            background-image: url("../../uploads/images/banner.jpg");
+        }
     </style>
     <!-- breadcrumb-start -->
     <section class="breadcrumb breadcrumb_bg banner-bg-1 overlay2 ptb200">
@@ -19,8 +19,8 @@
                 <div class="col-lg-7 offset-lg-1">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>Password Change</h2>
-                            <p> <a href="/">Home ></a> <span></span>Password Change</p>
+                            <h2>User Profile</h2>
+                            <p> <a href="/">Home ></a> <span></span>User Comments</p>
                         </div>
                     </div>
                 </div>
@@ -39,34 +39,32 @@
                     <div class="col-lg-2">
                         {% include "user_panel.html" %}
                     </div>
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tag }}" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
                     <div class="col-lg-10">
                         <div class="col-12">
-                            <h2 class="contact-title">Change Password</h2>
+                            <h2 class="contact-title">User Comments</h2>
                         </div>
-                        <form method="post">
-                            {% csrf_token %}
-                            {% for field in form %}
-                                <p>
-                                    {{ field.label_tag }}<br>
-                                    {{ field }}
-
-                                    {% if field.help_text %}
-                                        <small style="color: grey">{{ field.help_text }}</small>
-                                    {% endif %}
-                                    {% for error in field.errors %}
-                                        <p style="color: grey">{{ error }}</p>
-                                    {% endfor %}
-                                </p>
+                        <table class="table">
+                            <tr>
+                                <th>Restaurant</th>
+                                <th>Subject</th>
+                                <th>Rate</th>
+                                <th>Comment</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                            {% for rs in comment %}
+                                <tr>
+                                    <td><strong>{{ rs.restaurant }}</strong></td>
+                                    <td>{{ rs.subject }}</td>
+                                    <td>{{ rs.rate }}</td>
+                                    <td>{{ rs.comment }}</td>
+                                    <td>{{ rs.status }}</td>
+                                    <td>{{ rs.created_at }}</td>
+                                    <td><a href="/user/deletecomment/{{ rs.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure!!')">Delete</a> </td>
+                                </tr>
                             {% endfor %}
-                            <button class="btn btn-dark" type="submit">Save Changes</button>
-                        </form>
+                        </table>
                     </div>
                 </div>
             </div>
