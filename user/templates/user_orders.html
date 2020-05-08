@@ -1,0 +1,72 @@
+{% extends "homebase.html" %}
+
+{% block title %}{{profile.user_name}}{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block head%}<link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url}}' />{% endblock %}
+
+{% block content %}
+    <style>
+        .banner-bg-1{
+            background-image: url("../../uploads/images/banner.jpg");
+        }
+    </style>
+    <!-- breadcrumb-start -->
+    <section class="breadcrumb breadcrumb_bg banner-bg-1 overlay2 ptb200">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>User Profile</h2>
+                            <p> <a href="/">Home ></a> <span></span>User Orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-end -->
+    <!-- ================ contact section start ================= -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="d-none d-sm-block mb-5 pb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="contact-title">User Panel</h2>
+                    </div>
+                    <div class="col-lg-3">
+                        {% include "user_panel.html" %}
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="col-12">
+                            <h2 class="contact-title">User Orders</h2>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Detail</th>
+                            </tr>
+                            {% for rs in orders %}
+                                <tr>
+                                    <td>{{ rs.first_name }}</td>
+                                    <td>{{ rs.last_name }}</td>
+                                    <td>{{ rs.total }}</td>
+                                    <td>{{ rs.status }}</td>
+                                    <td>{{ rs.create_at }}</td>
+                                    <td><a href="/user/orderdetail/{{ rs.id }}" class="btn btn-sm btn-info">Detail</a> </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- ================ contact section end ================= -->
+
+{% endblock %}
