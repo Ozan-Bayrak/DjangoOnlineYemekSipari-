@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.forms import SearchForm, JoinForm
-from home.models import Setting, ContactForm, ContactFormMessage
+from home.models import Setting, ContactForm, ContactFormMessage, FAQ
 from order.models import ShopCart
 from restaurant.models import Foods, Category, Restaurant, Images, Comment
 
@@ -141,3 +141,13 @@ def join_view(request):
     form = JoinForm()
     context = {'form':form,'category': category}
     return render(request, 'join.html',context)
+
+
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.all().order_by('ordernumber')
+    context = {
+        'category': category,
+        'faq':faq
+    }
+    return render(request, 'faq.html', context)

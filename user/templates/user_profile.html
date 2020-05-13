@@ -43,8 +43,12 @@
                         <div class="col-12">
                             <h2 class="contact-title">User Information</h2>
                         </div>
-                         <img  class="img-thumbnail" src="{{ profile.image.url }}" alt="User Image" style="height: 100px" />
+
                         <table class="table">
+                            <tr>
+                                <th></th>
+                                <td><img class="img-thumbnail" src="{{ profile.image.url }}" alt="User Image" style="height: 100px" /></td>
+                            </tr>
                             <tr>
                                 <th scope="col">Name Surname</th>
                                 <td>{{ profile.user.first_name }}</td>

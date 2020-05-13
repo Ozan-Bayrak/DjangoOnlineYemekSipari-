@@ -39,7 +39,8 @@ urlpatterns = [
     path('join/', views.join_view, name='join_view'),
     path('shopcart/', orderviews.shopcart, name='shopcart'),
     path('category/<int:id>/<slug:slug>/', views.category_restaurants, name='category_restaurants'),
-    path('user_profile/',userviews.index, name='index')
+    path('user_profile/',userviews.index, name='index'),
+    path('faq/',views.faq, name='faq')
 
 ]
 

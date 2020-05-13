@@ -1,0 +1,53 @@
+{% extends "homebase.html" %}
+
+{% block title %}SSS{% endblock %}
+{% block keywords %}{% endblock %}
+{% block description %}{% endblock %}
+
+{% block head%}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        $( function() {
+            $( "#accordion" ).accordion();
+        } );
+    </script>
+{% endblock %}
+
+{% block content %}
+    <style>
+        .banner-bg-1{
+            background-image: url("../../uploads/images/banner.jpg");
+        }
+    </style>
+    <!-- breadcrumb-start -->
+    <section class="breadcrumb breadcrumb_bg banner-bg-1 overlay2 ptb200">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>SıkçaSorulanSorular</h2>
+                            <p> <a href="/">Home ></a> <span></span>SSS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-end -->
+    <div class="service-area">
+        <div class="container">
+            <div class="row">
+                <div id="accordion">
+                    {% for rs in faq %}
+                        <h3>{{rs.question}}</h3>
+                        <div>
+                            <p>
+                                {{ rs.answer }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{% endblock %}
