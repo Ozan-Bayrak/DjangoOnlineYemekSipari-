@@ -28,7 +28,7 @@
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo-img">
                             <a href="/">
-                                <img src="{% static 'img/logo.png' %}" alt="">
+                                <img src="../../uploads/images/logo2.jpg" alt="">
                             </a>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                             </div>
                             {% if user.id is not None %}
                                 <div class="get-quote d-none d-lg-block">
-                                    <a class="btn btn-success" href="/user_profile">{{user.first_name}}</a>
-                                    <a class="btn btn-danger" href="/logout/">Logout</a>
+                                    <a  class="btn fa fa-male btn-success btn-lg" href="/user_profile">{{user.first_name}}</a>
+                                    <a  class="btn btn-danger fa fa-sign-out btn-lg" href="/logout/">Logout</a>
                                 </div>
                             {% else %}
                                 <div class="get-quote d-none d-lg-block">
