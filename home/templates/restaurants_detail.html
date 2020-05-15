@@ -169,7 +169,7 @@
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
                         <h2>{{ restaurant.title }}</h2>
-                        <h4>Short Description:</h4>
+                        <h4>Restaurants Info:</h4>
                         <p>{{ restaurant.detail|safe}}</p>
                     </div>
                 </div>
@@ -188,7 +188,7 @@
                         <div class="card-body">
                             <h3 class="card-title">{{ rs.title }}</h3>
                             <h4><b>Price</b></h4>
-                            <p>{{ rs.price }}₺</p>
+                            <p><strong>{{ rs.price }}₺</strong></p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -220,6 +220,13 @@
                             </p>
                             <hr>
                         {% endfor %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tag }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <h1>Write Your Comment</h1>
                         <form action="/restaurant/addcomment/{{ restaurant.id }}" method="post">
                             {% csrf_token %}

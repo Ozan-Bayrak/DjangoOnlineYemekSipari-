@@ -14,7 +14,7 @@ from restaurant.models import Foods, Category, Restaurant, Images, Comment
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    sliderdata = Foods.objects.all()[:5]
+    sliderdata = Foods.objects.all().order_by('-id')[:5]
     category = Category.objects.all()
     lastrestaurants = Restaurant.objects.all().order_by('-id')[:6]
     current_user = request.user
