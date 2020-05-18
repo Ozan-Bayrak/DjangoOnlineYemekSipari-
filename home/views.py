@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.forms import SearchForm, JoinForm
-from home.models import Setting, ContactForm, ContactFormMessage, FAQ
+from home.models import Setting, ContactForm, ContactFormMessage, FAQ, UserProfile
 from order.models import ShopCart
 from restaurant.models import Foods, Category, Restaurant, Images, Comment
 
@@ -136,6 +136,12 @@ def join_view(request):
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username,password=password)
         login(request,user)
+        #Create data in profile for user
+        current_user=request.user
+        data = UserProfile()
+        data.user_id =current_user.id
+        data.image = "images/users/user.png"
+        data.save()
         return HttpResponseRedirect('/')
     category = Category.objects.all()
     form = JoinForm()
